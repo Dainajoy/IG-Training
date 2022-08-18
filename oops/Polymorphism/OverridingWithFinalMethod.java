@@ -9,10 +9,15 @@ class ClassWithFinal{
 }
 class ClassWithoutFinal extends  ClassWithFinal{
 
-    /*@Override
+    @Override
     int add(int a,int b){//Cannot override
         return a-b;
-    }*/
+    }
 }
 public class OverridingWithFinalMethod {
+    public static void main(String[] args) {
+        ClassWithoutFinal ov=new ClassWithoutFinal();
+        ov.add(3,5);
+
+    }
 }
