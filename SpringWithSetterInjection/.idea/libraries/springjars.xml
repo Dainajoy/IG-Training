@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="springjars">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/springjars (1).zip!/springjars" />
+      <root url="file://$USER_HOME$/Downloads/jar_files (1)" />
+      <root url="jar://$USER_HOME$/Downloads/org.springframework.context-2.5.5.a.jar.zip!/" />
+      <root url="file://$USER_HOME$/Downloads/org.springframework.context-2.5.5.a.jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Downloads/jar_files (1)" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/org.springframework.context-2.5.5.a.jar" recursive="false" />
+    <jarDirectory url="jar://$USER_HOME$/springjars (1).zip!/springjars" recursive="false" />
+  </library>
+</component>
