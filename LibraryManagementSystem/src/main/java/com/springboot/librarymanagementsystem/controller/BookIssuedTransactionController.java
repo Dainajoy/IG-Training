@@ -1,11 +1,13 @@
 package com.springboot.librarymanagementsystem.controller;
 
+import com.springboot.librarymanagementsystem.exception.ResourceNotFoundException;
 import com.springboot.librarymanagementsystem.model.BookIssuedTransaction_Info;
 import com.springboot.librarymanagementsystem.service.BookIssuedTransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +38,13 @@ public class BookIssuedTransactionController {
     @GetMapping("/getTransactionByTransactionId/{id}")
     public Optional<BookIssuedTransaction_Info> getTransactionByTransactionId(@PathVariable Long id) {
         log.info("Book issued controller called for fetching tranaction by transaction id.");
-        return bookissuedservice.findTransactionByTransactionId(id);
+        Optional<BookIssuedTransaction_Info>bookIssue=bookissuedservice.findTransactionByTransactionId(id);
+        if(bookIssue.isPresent()){
+            return bookIssue;
+        }else{
+            throw new ResourceNotFoundException("BookIssue not found with given Id: "+id);
+        }
+
     }
 
     @GetMapping("/getTransactionByStatus/{name}")

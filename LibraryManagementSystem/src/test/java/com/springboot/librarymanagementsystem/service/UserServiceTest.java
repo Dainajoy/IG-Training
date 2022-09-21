@@ -3,6 +3,7 @@ package com.springboot.librarymanagementsystem.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,8 +61,8 @@ public class UserServiceTest {
 
     @DisplayName("Junit test for getying all Users.")
     @Test
-    public void givenUsersObject_whenFindAll_thenReturnUsersObjcet() {
-        BDDMockito.given(userRepository.findAll()).willReturn((List<User>) user);
+    public void givenUsersObject_whenFindAll_thenReturnUsersObject() {
+        BDDMockito.given(userRepository.findAll()).willReturn(Collections.singletonList( user));
         List<User> UserList = userService.getAllUser();
         assertThat(UserList).isNotNull();
         assertThat(UserList.size()).isGreaterThan(0);
@@ -70,10 +71,10 @@ public class UserServiceTest {
     @DisplayName("Junit test for get user by user id.")
     @Test
     public void givenUserObject_whenFindById_thenReturnUserObject() {
-        user = User.builder().userId(10L).userName("Sree").userEmailId("sree@gmail.com")
+        user = User.builder().userId(4L).userName("Sree").userEmailId("sree@gmail.com")
                 .userMobileNo("111111")
                 .userAddress("Bangalore").userType("Student").build();
-        BDDMockito.given(userRepository.findByuserId(10L)).willReturn(user);
+        BDDMockito.given(userRepository.findByuserId(4L)).willReturn(Optional.ofNullable(user));
         Optional<User> savedUser = userService.getUserById(user.getUserId());
         assertThat(savedUser).isNotNull();
     }
@@ -81,8 +82,9 @@ public class UserServiceTest {
     @DisplayName("Junit test for get user by user name.")
     @Test
     public void givenUserObject_whenFindByName_thenReturnUserObject() {
-        BDDMockito.given(userRepository.findByuserName("Sree")).willReturn((List<User>) user);
-        List<User> savedUser = userService.getsUserByName("Sree");
+
+        BDDMockito.given(userRepository.save(user)).willReturn(user);
+        User savedUser=userService.createUser(user);
         assertThat(savedUser).isNotNull();
     }
 

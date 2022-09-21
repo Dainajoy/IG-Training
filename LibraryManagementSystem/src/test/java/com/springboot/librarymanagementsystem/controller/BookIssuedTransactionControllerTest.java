@@ -1,5 +1,6 @@
 package com.springboot.librarymanagementsystem.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -13,10 +14,13 @@ import java.util.Optional;
 
 import com.springboot.librarymanagementsystem.model.BookIssuedTransaction_Info;
 import com.springboot.librarymanagementsystem.model.Books_Info;
+import com.springboot.librarymanagementsystem.repository.BookIssueRepository;
 import com.springboot.librarymanagementsystem.serviceImpl.BookIssuedTransactionServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,10 +40,17 @@ public class BookIssuedTransactionControllerTest {
     @MockBean
     private BookIssuedTransactionServiceImpl bookIssueService;
 
+    @Mock
+    private BookIssueRepository bookIssueRepository;
     @Autowired
     private ObjectMapper objectMapper;
 
     private BookIssuedTransaction_Info bookIssue;
+    @BeforeEach
+    public void setupBookIssue() {
+        bookIssue = bookIssue.builder().bookIssueddate(new Date()).transactionStatus("Approved").remarks("Book Issued").build();
+    }
+
 
     @DisplayName("Junit test for creating new bookIssue Transaction using rest api")
     @Test
@@ -48,7 +59,7 @@ public class BookIssuedTransactionControllerTest {
                 transactionStatus("Transaction Approved").build();
         BDDMockito.given(bookIssueService.saveTransaction(bookIssuedTransaction, 2L, 1l, 1L)).willAnswer(invocation -> invocation.getArgument(0));
 
-        ResultActions response = mockMvc.perform(post("/Transaction/1/2/1")
+        ResultActions response = mockMvc.perform(post("/Transaction/1/1/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(bookIssuedTransaction)));
         response.andDo(print()).
@@ -84,34 +95,22 @@ public class BookIssuedTransactionControllerTest {
     public void givenBookObject_whenGetbyStatus_thenReturnBookObject() throws Exception {
         BookIssuedTransaction_Info bookIssuedTransaction = BookIssuedTransaction_Info.builder().transactionId(1L).remarks("Approved").
                 transactionStatus("Transaction Approved").build();
-        BDDMockito.given(bookIssueService.findTransactionByStatus("Approved")).willReturn((List<BookIssuedTransaction_Info>) bookIssuedTransaction);
+
+
         ResultActions response = mockMvc.perform(get("/getTransactionByStatus/Approved", bookIssuedTransaction.getTransactionId()));
         response.andExpect(status().isOk()).andDo(print());
+        BDDMockito.lenient().when(bookIssueService.findTransactionByStatus("Approved")).
+                thenReturn((List<BookIssuedTransaction_Info>) bookIssuedTransaction);
     }
 
-    @DisplayName("Junit test for update transaction  using rest api")
+    @DisplayName("Junit test for get book issue by transaction id")
     @Test
-    public void givenBookObject_whenToUpdateTransaction_thenReturnBookObject() throws Exception {
-        Books_Info savedbook = Books_Info.builder().bookId(1L)
-                .activeFlag(1).author("G. V. Desani").price(300).bookName("Arms and the Man")
-                .bookPublication("Shivani")
-                .noOfCopies(10L)
-                .build();
-
-        BookIssuedTransaction_Info bookIssuedTransaction = BookIssuedTransaction_Info.builder().transactionId(1L).bookActualreturndate(new Date()).
-                remarks("Approved").bookIssueddate(new Date()).bookReturneddate(new Date()).bookId(savedbook).
-                transactionStatus("Transaction Approved").build();
-
-        BookIssuedTransaction_Info updatedbookIssuedTransaction = BookIssuedTransaction_Info.builder().transactionId(1L).bookActualreturndate(new Date()).
-                remarks("Rejected").bookIssueddate(new Date()).bookReturneddate(new Date()).
-                bookId(savedbook).
-                transactionStatus("Rejected").build();
-
-        BDDMockito.given(bookIssueService.findTransactionByTransactionId(1L)).willReturn(Optional.of(bookIssuedTransaction));
-        BDDMockito.given(bookIssueService.updateTransaction(updatedbookIssuedTransaction)).willReturn(updatedbookIssuedTransaction);
-        ResultActions response = mockMvc.perform(put("/updateTransaction"));
-        response.andExpect(status().isOk()).andDo(print());
+    public void givenBookIssue_whenFindById_thenReturnBookIssue() {
+        BDDMockito.given(bookIssueRepository.findById(bookIssue.getTransactionId())).willReturn(Optional.of(bookIssue));
+        BookIssuedTransaction_Info savedBookIssue = bookIssueService.getBookIssueById(bookIssue.getTransactionId()).get();
+        assertThat(savedBookIssue).isNotNull();
     }
+
 
 }
 

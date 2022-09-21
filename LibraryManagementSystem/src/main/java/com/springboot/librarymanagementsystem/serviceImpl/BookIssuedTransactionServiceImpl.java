@@ -75,4 +75,11 @@ public class BookIssuedTransactionServiceImpl implements BookIssuedTransactionSe
         existingProduct.setModifiedon(bookIssuedTransaction.getModifiedon());
         return bookTransactionRepository.save(existingProduct);
     }
+
+    @Override
+    public Optional<BookIssuedTransaction_Info> getBookIssueById(Long transactionId) {
+        return bookTransactionRepository.findById(transactionId);
+    }
+
+
 }

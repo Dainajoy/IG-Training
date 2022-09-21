@@ -38,8 +38,8 @@ public class EmployeeRepositoryTest {
     @Order(2)
     @Rollback(value=false)
     public void getEmployee(){
-    Employee employee=employeeRep.findById(4).get();
-    Assertions.assertThat(employee.getEmpId()).isEqualTo(1);
+    Employee employee=employeeRep.findById(5).get();
+    Assertions.assertThat(employee.getEmpId()).isEqualTo(5);
     }
     @Test
     @Order(3)

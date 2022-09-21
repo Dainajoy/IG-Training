@@ -47,7 +47,7 @@ public class UserRepositoryTest {
     public void givenUserObject_whenSaveall_thenReturnUser() {
         userRepository.save(user);
         List<User> allBook = userRepository.findAll();
-        assertThat(allBook.size()).isGreaterThanOrEqualTo(9);
+        assertThat(allBook.size()).isGreaterThanOrEqualTo(1);
     }
 
     @DisplayName("Junit Test for get All Employee.")
@@ -58,7 +58,7 @@ public class UserRepositoryTest {
 
         List<User> userList = userRepository.findAll();
         assertThat(userList).isNotNull();
-        assertThat(userList.size()).isEqualTo(9);
+        assertThat(userList.size()).isEqualTo(5);
     }
 
     @DisplayName("Junit test for getting user by user id.")
@@ -82,10 +82,11 @@ public class UserRepositoryTest {
     public void givenUserObject_whenUpdate_thenReturnUser() {
         userRepository.save(user);
         User savedUser = userRepository.findById(user.getUserId()).get();
+        System.out.println("**********************"+savedUser.getUserName());
         savedUser.setUserEmailId("fran@gmail.com");
         savedUser.setUserMobileNo("99999911");
         User updateUser = userRepository.save(savedUser);
-        assertThat(updateUser.getUserEmailId()).isEqualTo("rahul@gmail.com");
+        assertThat(updateUser.getUserEmailId()).isEqualTo("fran@gmail.com");
         assertThat(updateUser.getUserMobileNo()).isEqualTo("99999911");
     }
 

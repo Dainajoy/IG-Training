@@ -121,12 +121,12 @@ public class BooksControllerTest {
     @DisplayName("Junit test for updating book using rest api")
     @Test
     public void givenBookObject_ToUpdateBookData_thenReturnBookObject() throws Exception {
-        Books_Info savedbook = Books_Info.builder().bookId(1L)
+        Books_Info savedbook = Books_Info.builder().bookId(4L)
                 .activeFlag(1).author("G. V. Desani").price(300).bookName("Arms and the Man")
                 .bookPublication("Shivani")
                 .noOfCopies(10L)
                 .build();
-        Books_Info updatedbook = Books_Info.builder().bookId(1L)
+        Books_Info updatedbook = Books_Info.builder().bookId(4L)
                 .activeFlag(1).author("G. V. Desani").price(300).bookName("Arms and the Man").
                 bookPublication("Shankar")
                 .noOfCopies(10L)

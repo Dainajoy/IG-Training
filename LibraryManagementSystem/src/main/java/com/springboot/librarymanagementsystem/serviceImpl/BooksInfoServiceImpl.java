@@ -25,12 +25,21 @@ public class BooksInfoServiceImpl implements BooksInfoService {
 
     public Books_Info saveBook(Long libId, Books_Info book) {
         log.info("Book service called for save book.");
-        User user = userrepository.findById(libId).get();
+        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^"+libId);
+
+
+        User user=userrepository.findById(libId).get();
+
         book.setCreatedBy(user);
         book.setModifiedBy(user);
         return bookrepository.save(book);
-    }
 
+    }
+    @Override
+    public Books_Info saveBookInfo(Books_Info book) {
+
+        return bookrepository.save(book);
+    }
     public List<Books_Info> getAllBook() {
         log.info("Book service called for getting all book.");
         return bookrepository.findAll();
@@ -70,20 +79,15 @@ public class BooksInfoServiceImpl implements BooksInfoService {
         existingBook.get(0).setModifiedBy(user);
         return bookrepository.save(existingBook.get(0));
     }
+    public Books_Info deleteBookById(Long bookId) {
+        log.info("Book service called for deleting all book's.");
+
+         bookrepository.deleteById(bookId);;
+        return null;
+    }
 
     public Books_Info updateBook(Books_Info book) {
         log.info("Book service for updating all book's.");
-        Books_Info existingBook = bookrepository.findById(book.getBookId()).orElse(null);
-        existingBook.setBookName(book.getBookName());
-        existingBook.setAuthor(book.getAuthor());
-        existingBook.setBookPublication(book.getBookPublication());
-        existingBook.setPrice(book.getPrice());
-        existingBook.setNoOfCopies(book.getNoOfCopies());
-        existingBook.setCreatedBy(book.getCreatedBy());
-        existingBook.setCreatedOn(book.getCreatedOn());
-        existingBook.setModifiedBy(book.getModifiedBy());
-        existingBook.setModifiedOn(book.getModifiedOn());
-        existingBook.setActiveFlag(book.getActiveFlag());
-        return bookrepository.save(existingBook);
+        return bookrepository.save(book);
     }
 }

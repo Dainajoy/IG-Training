@@ -1,6 +1,7 @@
 package com.springboot.librarymanagementsystem.service;
 
 import com.springboot.librarymanagementsystem.model.BookIssuedTransaction_Info;
+import com.springboot.librarymanagementsystem.model.Books_Info;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface BookIssuedTransactionService {
     public List<BookIssuedTransaction_Info> findTransactionByStatus(String name);
 
     public BookIssuedTransaction_Info updateTransaction(BookIssuedTransaction_Info bookIssuedTransaction);
+        Optional<BookIssuedTransaction_Info> getBookIssueById(Long transactionId);
+
+
 }

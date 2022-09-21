@@ -1,9 +1,9 @@
-book_Id,author,price,book_Name,no_Of_Copies,book_Publication,total_pages
-10,	Rajesh Talwar,	799,	The Boy Who Wrote a Constitution,	10,	Jaico Publishing House,345
-11,	Bimal Jalal,	500,	The India Story,	10,	Tata McGraw Hill,543
-12,	G. V. Desani,	300,	Arms and the Man,	10,	Shivani ,765
-13,	JK Rowling,	450,	The Christmas Pig,	10,	Jaico Publishing House,724
-14,	George Eliot,	460,	Silas Marner,	10,	Tata McGraw Hill,821
-15,	George Orwell,	478,	Nineteen Eighty-four,	10,	Westland Publications,510
-16,	Goethe	478	Faust,	10,	Penguin Random House India,234
-17,	Gopinath Mohanty,	500,	Paraja	,10	,Westland Publications,123
+bookId,author,price,bookName,noOfCopies,bookPublication,totalPages
+10,"	Rajesh Talwar","	799","	The Boy Who Wrote a Constitution","	10","	Jaico Publishing House",345
+11,"	Bimal Jalal","	500","	The India Story","	10","	Tata McGraw Hill",543
+12,"	G. V. Desani","	300","	Arms and the Man","	10","	Shivani ",765
+13,"	JK Rowling","	450","	The Christmas Pig","	10","	Jaico Publishing House",724
+14,"	George Eliot","	460","	Silas Marner","	10","	Tata McGraw Hill",821
+15,"	George Orwell","	478","	Nineteen Eighty-four","	10","	Westland Publications",510
+16,"	Goethe	478	Faust","	10","	Penguin Random House India",234,,
+17,"	Gopinath Mohanty","	500","	Paraja	","10	",Westland Publications,123

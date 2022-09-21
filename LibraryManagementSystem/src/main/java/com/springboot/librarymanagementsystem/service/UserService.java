@@ -14,6 +14,7 @@ public interface UserService {
     public List<User> SaveAllUser(List<User> userTable);
 
     public List<User> getAllUser();
+    public User createUser(User user);
 
     public Optional<User> getUserById(Long id);
 

@@ -23,9 +23,10 @@ import java.util.List;
         public List<Books_Info> getsBookByPublication(String name);
 
 
-
+        public Books_Info saveBookInfo(Books_Info book) ;
         public Books_Info deleteBook(String name, Long id);
 
         public Books_Info updateBook(Books_Info book);
+        public Books_Info deleteBookById( Long bookId) ;
 
     }
